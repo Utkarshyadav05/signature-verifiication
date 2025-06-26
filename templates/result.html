@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signature Comparison Result</title>
+    <style>
+        /* General Reset */
+        body, h1, div, p, a, img {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Dark Theme with Background Animation */
+        body {
+            background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Container for Result Content */
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .result {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .score {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .images {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .images div {
+            flex: 1;
+        }
+
+        .images p {
+            font-size: 1rem;
+            color: #ddd;
+            margin-bottom: 0.5rem;
+        }
+
+        .images img {
+            max-width: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Signature Comparison Result</h1>
+        <div class="result">{{ result }}</div>
+        {% if score is not none %}
+            <div class="score"></div>
+        {% endif %}
+        <div class="images">
+            <div>
+                <p>Original Signature</p>
+                <img src="{{ url_for('uploaded_file', filename=image1) }}" alt="Original Signature">
+            </div>
+            <div>
+                <p>Uploaded Signature</p>
+                <img src="{{ url_for('uploaded_file', filename=image2) }}" alt="Uploaded Signature">
+            </div>
+        </div>
+        <a href="{{ url_for('check_signature') }}" class="back-link">Compare Another Signature</a>
+    </div>
+</body>
+</html>

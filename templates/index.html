@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signify - Signature Verification</title>
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --primary-dark: #5649c0;
+            --secondary-color: #a29bfe;
+            --dark-bg: #0f0f12;
+            --text-color: #f5f6fa;
+            --text-muted: #b2b2b2;
+            --glass-bg: rgba(30, 30, 36, 0.7);
+            --success-color: #00b894;
+            --error-color: #d63031;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(rgba(15, 15, 18, 0.7), rgba(15, 15, 18, 0.9)),
+                        url('/static/uploads/image no-1.jpg') no-repeat center center/cover;
+            z-index: -1;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .content {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .about-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 5rem;
+        }
+
+        .about-box {
+            background: var(--glass-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .about-box h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        #about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .buttons {
+            margin-top: 4rem;
+            display: flex;
+            gap: 1.5rem;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .btn {
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+            z-index: -1;
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .btn-signup {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-login:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .about-box {
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .about-container {
+                justify-content: center;
+                margin-top: 3rem;
+            }
+            
+            .about-box {
+                padding: 1.5rem;
+                max-width: 100%;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .about-box h2 {
+                font-size: 1.5rem;
+            }
+            
+            #about-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="content">
+        <h1>SIGNIFY</h1>
+        
+        <div class="about-container">
+            <div class="about-box">
+                <h2>About Us</h2>
+                <p id="about-text">Signify revolutionizes signature verification with cutting-edge AI technology. Our platform offers secure, instant authentication for documents and transactions. Using advanced pattern recognition and machine learning algorithms, we provide accurate verification results in seconds. Whether for legal documents, financial transactions, or personal authentication, Signify ensures the integrity of every signature.</p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="{{ url_for('signup') }}" class="btn btn-signup">Get Started</a>
+            <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+        </div>
+    </div>
+
+    <script>
+        // Typewriter effect for about text
+        const aboutText = "Signify revolutionizes signature verification with cutting-edge AI technology. Our platform offers secure, instant authentication for documents and transactions. Using advanced pattern recognition and machine learning algorithms, we provide accurate verification results in seconds. Whether for legal documents, financial transactions, or personal authentication, Signify ensures the integrity of every signature.";
+        const aboutElement = document.getElementById('about-text');
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < aboutText.length) {
+                aboutElement.innerHTML += aboutText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 20);
+            }
+        }
+        
+        // Start the effect after page loads
+        window.addEventListener('load', () => {
+            aboutElement.innerHTML = '';
+            setTimeout(typeWriter, 1500);
+        });
+    </script>
+</body>
+</html>
