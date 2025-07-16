@@ -91,32 +91,63 @@ ii.	Present findings to stakeholders and discuss the next steps for continuous i
 # Implementation
 
 This is landing page of SigniFi : Signature Verification Using ML For Reducing Bank Fraud 
-<img width="1004" height="564" alt="image" src="https://github.com/user-attachments/assets/d31ad645-bd36-42dc-a730-a1bf31a7aff0" />
- 
-Sign-Up Page 
- 
+<img width="1909" height="1040" alt="Screenshot 2025-07-16 221701" src="https://github.com/user-attachments/assets/9bdaaad8-d0c6-4e28-9ead-b273eb8049ff" />
+
+
+Sign-Up Page
+<img width="1004" height="582" alt="image" src="https://github.com/user-attachments/assets/11b11e4c-5587-48c5-944b-0880a3de3419" />
 
 
 Login Page
+<img width="1004" height="576" alt="image" src="https://github.com/user-attachments/assets/ce3ca5bc-4a26-4cb1-b534-3d6eb8d843f9" />
+
  
 Home Page 
- 
+ <img width="1845" height="1036" alt="image" src="https://github.com/user-attachments/assets/b5dfd59c-c15a-402b-b519-bb2cdc148885" />
+
 
 
 
 
 Add New Customer Data
+<img width="1004" height="466" alt="image" src="https://github.com/user-attachments/assets/54f43201-cd8d-4f79-8ebc-7d088cbbbf62" />
+
  
 Verify Signature (Extracting Customer Data By Account Number)
+<img width="1004" height="707" alt="image" src="https://github.com/user-attachments/assets/86ab8af7-e515-4655-8926-a426affc61b6" />
+
  
 
 
 
 Signature Comparison (Fetched User Data And Comparison)
+<img width="1004" height="564" alt="image" src="https://github.com/user-attachments/assets/71e337be-cb9b-4186-8768-e52af71c0051" />
+
  
 
 Signature Verification Result 
+<img width="1004" height="564" alt="image" src="https://github.com/user-attachments/assets/51930e02-e4a6-4cff-b72d-34cb1d6092d6" />
+
  
+
+# Reference
+
+# Wikipedia - Signature Recognition
+•	This article on Wikipedia provides a general overview of signature recognition, both online and offline, along with various approaches using machine learning models.
+•	Signature Recognition - Wikipedia
+
+# Towards Data Science - Signature Verification using Deep Learning
+•	This blog post on Towards Data Science covers how deep learning techniques, especially Convolutional Neural Networks (CNNs), can be used for signature verification.
+•	Signature Verification using Deep Learning
+
+# Google Scholar - Automatic Signature Verification Machine Learning
+•	You can find many academic papers on Google Scholar that discuss signature verification techniques using machine learning, including CNNs, SVMs, and other models.
+•	Google Scholar - Signature Verification with Machine Learning
+
+# Medium - Signature Verification using Python
+•	A tutorial on Medium demonstrates how to implement a basic signature verification system using Python and machine learning libraries like Keras and TensorFlow.
+•	Signature Verification using Python
+
 
 
 
